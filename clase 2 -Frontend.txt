@@ -1,0 +1,38 @@
+//Recordar estos comandos son para instalar los plugins necesarios para compilar SASS y para tener el bridge necesario entre Gulp y SASS
+$ npm install --save-dev node-sass gulp-sass
+
+//Para ejecutar tarea SASS
+$ gulp sass
+
+Browsersync 
+Actualiza los cambios en la web cuando algún archivo es actualizado. (Es un pequeño servidor web)
+
+========================================Instalar Browsersync MIN 46 ======================================
+$ npm install --save-dev browser-sync
+
+Se puede configurar para que haga refresh en el HMTL al hacer cualquier cambio o en el backend también se puede para que actualize nuestros cambios en el back.
+Se actualiza en todos los navegadores abiertos que tengas
+
+ //Observa cambios en los archivos HTML
+    gulp.watch("src/*.html").on("change", browserSync.reload);  //Con brwosersync se recarga el archivo  html
+
+
+//En UI localhost:3001 se pueden configurar varias cosas de Browser-sync
+Para que browser sync trabaje con un fronten es necesario cambiar el init({...})
+
+ browserSync.init({
+	
+	proxxy: "http://127.0.0.1:8080" //la direccion donde esta corriendo nuestro backend
+});
+
+
+=======================================Plugin Notify MIN 83 ================================================
+$ npm install --save-dev gulp-notify
+
+
+======Instalar en Vs Code ==========================
+Beautify
+Babel
+
+
+Descargar ZSH y ver tutoriales powerlines command user
