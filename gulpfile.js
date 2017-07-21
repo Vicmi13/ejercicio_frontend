@@ -35,7 +35,7 @@ gulp.task('sass', function (){
 //COpiar e importar HTML
 gulp.task('html', function(){
     gulp.src('src/*.html')
-    .pipe(gulpImport('src/components')) //en la carptea src/components es donde estaran nuetsros archivos HTML
+    .pipe(gulpImport('src/components/')) //en la carptea src/components es donde estaran nuetsros archivos HTML
     .pipe(gulp.dest('dist/')) //esos archivos HTML se dejan en la carpeta 'dist'
     .pipe(browserSync.stream())
     .pipe(notify('HTML compilado'));
