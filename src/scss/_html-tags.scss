@@ -3,4 +3,18 @@ body{
     font-family: $main-font-family;
     font-size: $font-size-base;
     color:$main-text-color;
+
+    @include if-mobile-landscape{
+        background: $color-iam_afternoons;
+    }
+
+     @include if-tablet-landscape{
+        background: $color-innocent;
+    }
+
+     @include if-tablet-portrait{
+        background: $color-martha;
+    }
+
+
 }

@@ -1,0 +1,39 @@
+//Es importante usarlas de manera cuidadoda, el mejor ejercicio es 
+//cambiando los colores y estirar para ver el comportamientos
+
+@mixin if-mobile-landscape{
+    @media(max-width: #{mobile-landscape-width}){
+        @content;
+    }
+}
+
+@mixin if-mobile-portrait{
+    @media (max-width: #{$mobile-portrait-width}){
+        @content;
+    }
+}
+
+//Es una llamada tipo recursiva 
+@mixin if-mobile{
+    @include if-mobile-landscape{
+        @content;
+    }
+}
+
+@mixin if-tablet-landscape{
+    @media(min-width :#{$tablet-landscape-width}){
+        @content;
+    }
+}
+
+@mixin if-tablet-portrait{
+    @media(min-width :#{$tablet-portrait-width}){
+        @content;
+    }
+}
+
+@mixin if-tablet{
+    @include if-tablet-portrait{
+        @content;
+    }
+}
