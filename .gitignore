@@ -7,3 +7,6 @@ yarn-error.log*
 
 #dependency directories
 node_modules/
+
+#La carpeta dis no forma parte del repo
+dist/
