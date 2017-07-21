@@ -1,5 +1,8 @@
-$background-color: orange;
+@import url('https://fonts.googleapis.com/css?family=Bitter|Lato');
 
-body{
-    background:  $background-color;
-}
+@import "variables";
+@import "html-tags";
+
+//Components
+@import "components/header";
+@import "components/song-list";

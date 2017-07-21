@@ -1,0 +1,19 @@
+.web-header{
+    box-sizing: border-box;
+    background: fade-out($color-martha, 0.15);
+    padding: $font-size-base;
+    color: $color-iam_afternoons;
+    text-align: center;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    transition: background 0.2s;
+    &:hover {
+        background: $color-penny;
+    }
+    .web-tittle{
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: $font-size-large;
+    }
+}

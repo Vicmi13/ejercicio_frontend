@@ -1,0 +1,22 @@
+.song-list{
+    margin-top: 55px;
+    .song{
+        box-sizing: border-box;
+        width: calc(50% - 10px);
+        float: left;
+        background: $color-innocent;
+        padding: 15px;
+        margin: 10px 5px;
+        .cover{
+            width: 100%;
+        }
+        .artist{
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: $font-size-large;
+        }
+        .tittle{
+            margin-top: 5px;
+        }
+    }
+}

@@ -15,7 +15,7 @@ gulp.task("default", ["html", "sass"], function (){ //Indica que inicialize la t
     //Observa cambios en los archivos HTML y recarga el navegador
     // gulp.watch("src/*.html").on("change", browserSync.reload); una forma
     //Se usaba reload => function(){ browserSync.reload(); notify().write('Navegador recargado'); })
-    gulp.watch("src/*.html", ['html']); //Se ejecuta la tarea 'html'
+    gulp.watch(["src/*.html", "src/**/*.html"], ['html']); //Se ejecuta la tarea ['html']
 
 })
 
@@ -38,7 +38,7 @@ gulp.task('html', function(){
     .pipe(gulpImport('src/components/')) //en la carptea src/components es donde estaran nuetsros archivos HTML
     .pipe(gulp.dest('dist/')) //esos archivos HTML se dejan en la carpeta 'dist'
     .pipe(browserSync.stream())
-    .pipe(notify('HTML compilado'));
+    .pipe(notify('HTML importado'));
 
 })
 
