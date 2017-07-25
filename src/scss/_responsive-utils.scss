@@ -1,8 +1,6 @@
-//Es importante usarlas de manera cuidadoda, el mejor ejercicio es 
-//cambiando los colores y estirar para ver el comportamientos
 
 @mixin if-mobile-landscape{
-    @media(max-width: #{mobile-landscape-width}){
+    @media(max-width: #{$mobile-landscape-width}){
         @content;
     }
 }

@@ -5,15 +5,15 @@ body{
     color:$main-text-color;
 
     @include if-mobile-landscape{
-        background: $color-iam_afternoons;
+        background: black;
     }
 
      @include if-tablet-landscape{
-        background: $color-innocent;
+        background: white;
     }
 
      @include if-tablet-portrait{
-        background: $color-martha;
+        background: red;
     }
 
 
