@@ -10,14 +10,21 @@
         height: 240px;
         max-height: 240px;
         overflow: hidden;
+
+        @include if-mobile-landscape{
+            width: calc(25% - 10px );
+        }
+
+        @include if-desktop{
+            width: calc(20% - 10px);
+        }
         .cover{
             width: 100%;
         }
         .artist{
             font-weight: bold;
             margin-top: 10px;
-            overflow: hidden;
-            font-size: $font-size-large;
+           
         }
         .tittle{
             margin-top: 5px;
