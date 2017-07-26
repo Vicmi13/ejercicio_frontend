@@ -2,10 +2,13 @@ var gulp = require("gulp"),
     sass = require('gulp-sass'),
     browserSync = require('browser-sync').create(),
     notify = require('gulp-notify'),
-    gulpImport = require('gulp-html-import');
+    gulpImport = require('gulp-html-import'),
+    tap = require('gulp-tap'),
+    browserify = require('browserify'),
+    buffer = require ('gulp-buffer');
 
 //definir tarea por defecto
-gulp.task("default", ["html", "sass"], function (){ //Indica que inicialize la tarea '[sass]' y luego la tarea default osea entra ya a la function
+gulp.task("default", ["html", "sass", "js"], function (){ //Indica que inicialize la tarea '[sass]' y luego la tarea default osea entra ya a la function
     //iniciamos el servidor de desarrollo.. en esa carpeta ANTES 'src/'  AHORA 'dist/'    
     browserSync.init({server: "dist/"});
 
@@ -16,6 +19,9 @@ gulp.task("default", ["html", "sass"], function (){ //Indica que inicialize la t
     // gulp.watch("src/*.html").on("change", browserSync.reload); una forma
     //Se usaba reload => function(){ browserSync.reload(); notify().write('Navegador recargado'); })
     gulp.watch(["src/*.html", "src/**/*.html"], ['html']); //Se ejecuta la tarea ['html']
+
+    //observa cambios en los archivos JS y compila el JS de nuevo
+    gulp.watch(["src/js/*.js", "src/js/**/*.js" ], ["js"])
 
 })
 
@@ -42,7 +48,21 @@ gulp.task('html', function(){
 
 })
 
-//Construir los archivos que se generaran en el servidor de producción (archivo CSS, JS, HTML ) finales
-//gulp.task('build', function(){
+//compilar y generar un único JS
+gulp.task('js', function(){
+    gulp.src('src/js/main.js')
+        .pipe(tap(function(file) { //tap nos permite ejecutar una funcion por cada fichero relacionado en gulp.src
+            //reemplazamos el contenido del fichero (main.js) por lo que nos devuelve browserify pasandole el fichero
+            file.contents = browserify(file.path) //creamos una instancia de browserify en base al archivo
+                            .transform('babelify', {presets : ["es2015"]}) //traduce el codigo de ES6 -> ES5
+                            .bundle() //Compilamos  el archivo
+                            .on("error", function(error){
+                                return notify().write(error);
+                            })
 
-//})
+        }))
+        .pipe(buffer()) //convertimos a buffer para que funcione el sigueinte pipe
+        .pipe(gulp.dest("dist/")) //lo guardamos en la carpeta dist
+        .pipe(browserSync.stream()) //recargamos el navegador
+        .pipe(notify("JS compilado"));
+})
