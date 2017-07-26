@@ -5,7 +5,14 @@ var gulp = require("gulp"),
     gulpImport = require('gulp-html-import'),
     tap = require('gulp-tap'),
     browserify = require('browserify'),
-    buffer = require ('gulp-buffer');
+    buffer = require ('gulp-buffer'),
+    sourcemaps = require('gulp-sourcemaps'),
+    htmlmin = require ('gulp-htmlmin'),
+    uglify = require ('gulp-uglify'),
+    postcss = require ('gulp-postcss'),
+    autoprefixer = require ('autoprefixer'),
+    cssnano = require('cssnano');
+
 
 //definir tarea por defecto
 gulp.task("default", ["html", "sass", "js"], function (){ //Indica que inicialize la tarea '[sass]' y luego la tarea default osea entra ya a la function
@@ -28,11 +35,16 @@ gulp.task("default", ["html", "sass", "js"], function (){ //Indica que inicializ
 //compiar SASS.
 gulp.task('sass', function (){
     gulp.src("src/scss/style.scss") //cargamos el archivo style.scss
-        
+        // ====SE AGREGAN SOURCE MAPS PARA SASS CLASE 6====
+        .pipe(sourcemaps.init()) //Comienza a capturar los  sourcemaps
         .pipe(sass().on('error', function(error){
             return notify().write(error); //Si ocurre un error, se muestra una notificación
         })) //lo compilamos con gulp-sass
-
+        .pipe(postcss([
+            autoprefixer(), //Transforma el CSS dandole compatibilidad a versiones antiguas 
+            cssnano() //Comprime o minifica el CSS
+        ]))
+        .pipe(sourcemaps.write('./')) //genera el sourcemap en la misma carpeta que el CSS 
         .pipe(gulp.dest("dist/")) //guardamos el resultado en la carpeta css
         .pipe(browserSync.stream()) //recarga el CSS del navegador 
         .pipe(notify('SASS compilado')) //Muestra modificación en pantalla
@@ -41,7 +53,8 @@ gulp.task('sass', function (){
 //COpiar e importar HTML
 gulp.task('html', function(){
     gulp.src('src/*.html')
-    .pipe(gulpImport('src/components/')) //en la carptea src/components es donde estaran nuetsros archivos HTML
+    .pipe(gulpImport('src/components/')) //en la carptea src/components es donde estaran nuetsros archivos HTML. Reemplaza los @import de los <HTML></HTML>
+    .pipe(htmlmin({collapseWhitespace: true})) //Minifica el HTML 
     .pipe(gulp.dest('dist/')) //esos archivos HTML se dejan en la carpeta 'dist'
     .pipe(browserSync.stream())
     .pipe(notify('HTML importado'));
@@ -53,7 +66,7 @@ gulp.task('js', function(){
     gulp.src('src/js/main.js')
         .pipe(tap(function(file) { //tap nos permite ejecutar una funcion por cada fichero relacionado en gulp.src
             //reemplazamos el contenido del fichero (main.js) por lo que nos devuelve browserify pasandole el fichero
-            file.contents = browserify(file.path) //creamos una instancia de browserify en base al archivo
+            file.contents = browserify(file.path, {debug: true}) //creamos una instancia de browserify en base al archivo
                             .transform('babelify', {presets : ["es2015"]}) //traduce el codigo de ES6 -> ES5
                             .bundle() //Compilamos  el archivo
                             .on("error", function(error){
@@ -62,6 +75,9 @@ gulp.task('js', function(){
 
         }))
         .pipe(buffer()) //convertimos a buffer para que funcione el sigueinte pipe
+        .pipe(sourcemaps.init({loadMaps: true})) //captura los source maps del fichero de origen
+        .pipe(uglify()) //Minificamos el JS
+        .pipe(sourcemaps.write('./')) //y los guarda en el mismo directorio que el archivo fuente
         .pipe(gulp.dest("dist/")) //lo guardamos en la carpeta dist
         .pipe(browserSync.stream()) //recargamos el navegador
         .pipe(notify("JS compilado"));

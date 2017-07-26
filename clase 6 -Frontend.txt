@@ -1,0 +1,45 @@
+export default function suma(a, b){
+    return a + b;
+};
+
+->El default sirve para que cuando se haga un import de un modulo con ES6 si no se dice exactamente lo que se quiere importar por defecto importa ese modulo a menos que se diga lo contrario
+
+
+======================== Source Maps ===================================
+$npm install --save-dev gulp-sourcemaps
+
+Nos ayudan a encontrar los errores en los archivos origenes. Nos ayuda a depurar los posibles errores cuando un js no es el original con el que se esta trabajando al hacer el deploy
+
+KAS si los sube a producción, a un usuario normal no les afecta. Funcionan con la consola de desarrollador soo es Opcional
+
+
+===================== Optimización =====================================
+-Minificando HTML
+$npm install gulp-htmlmin
+
+-Minificar el JS
+$npm install gulp-uglify
+
+-PostCSS
+->cssnano 
+Los CSS pesen menos
+
+->autoprefixer
+Compatbilidad del CSS con versiones antiguas
+
+$npm install --save-dev gulp-postcss autoprefixer cssnano
+Hacer que los archivos pesen menos
+
+
+
+-Un solo comando para instalar todos
+$ npm install --save-dev gulp-postcss gulp-notify gulp-htmlmin postcss cssnano autoprefixer
+
+
+-Instalar también 
+$npm install --save-dev gulp-postcss
+
+Con todo esto se acaban de instalar plugins para minimizar el peso de los archivos del proyecto
+
+En el style.css -webkit-*** estos prefijos los metio 'autoprefixed' y nos ayudan para que tengan compatibilidad con navegadores anteriores
+
