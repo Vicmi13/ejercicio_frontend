@@ -9,24 +9,24 @@ export default class UIManager{
            this.uiStateClasses = "empty loading error partial ideal"; //Clases CSS que definen estados de componentes
            this.element = $(selector); //Seleccionamos el elemto de Jquery en el constructor 
     }
-
+    
     setEmpty(){
-        this.element.removeClass().addClass('empty');
+        this.element.removeClass(this.uiStateClasses ).addClass('empty');
     }
 
     setLoading(){
-        this.element.removeClass().addClass('loading');
+        this.element.removeClass(this.uiStateClasses ).addClass('loading');
     }
 
     setError(){
-        this.element.removeClass().addClass('error');
+        this.element.removeClass(this.uiStateClasses ).addClass('error');
     }
 
     setPartial(){
-        this.element.removeClass().addClass('partial');
+        this.element.removeClass(this.uiStateClasses ).addClass('partial');
     }
 
     setIdeal(){
-        this.element.removeClass().addClass('ideal');    
+        this.element.removeClass(this.uiStateClasses ).addClass('ideal');    
     }
 }
