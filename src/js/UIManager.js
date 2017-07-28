@@ -29,4 +29,29 @@ export default class UIManager{
     setIdeal(){
         this.element.removeClass(this.uiStateClasses ).addClass('ideal');    
     }
+
+    setEmptyHtml(html){
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        this.element.find(".ui-status.empty").html(html);
+    }
+
+    setLoadingHtml(html){
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        this.element.find(".ui-status.loading").html(html);
+    }
+
+    setErrorHtml(html){
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        this.element.find(".ui-status.error").html(html);
+    }
+
+    setPartialHtml(html){
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        this.element.find(".ui-status.partial").html(html);
+    }
+
+    setIdealHtml(html){
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        this.element.find(".ui-status.ideal").html(html);
+    }
 }
