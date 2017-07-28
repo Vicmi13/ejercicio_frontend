@@ -16,8 +16,9 @@ var gulp = require("gulp"),
 
 //definir tarea por defecto
 gulp.task("default", ["html", "sass", "js"], function (){ //Indica que inicialize la tarea '[sass]' y luego la tarea default osea entra ya a la function
-    //iniciamos el servidor de desarrollo.. en esa carpeta ANTES 'src/'  AHORA 'dist/'    
-    browserSync.init({server: "dist/"});
+    //iniciamos el servidor de desarrollo.. en esa carpeta ANTES 'src/'  AHORA 'dist/'  
+    //browserSync.init({server: "dist/"}); -> Se sustituye el server por un proxxy ya que tenemos  un backend, entonces se pasa la URL
+    browserSync.init({proxy: "http://127.0.0.1:3100/"});
 
     //Observa los cambios en los archivos SASS y ejecuta la tarea 'sass'
     gulp.watch(["src/scss/*.scss", "src/scss/**/*.scss"], ["sass"])
