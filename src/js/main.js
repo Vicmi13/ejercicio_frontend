@@ -1,10 +1,12 @@
 window.$ = window.jQuery = require("jquery");
 
+import  SongService from "./SongService";
+
+const songService = new SongService("/songs/");
+
 // Cargar la lista de canciones con AJAX
-$.ajax({
-    url: "/songs/",
-    success: songs => {
-        // Comprobamos si hay canciones
+songService.list(songs =>{
+    // Comprobamos si hay canciones
         if (songs.length == 0) {
             // Mostramos el estado vacío
             $(".songs-list").removeClass("loading").addClass("empty");
@@ -25,12 +27,10 @@ $.ajax({
             // Quitamos el mensaje de cargando y mostramos la lista de canciones
             $(".song-list").removeClass("loading").addClass("ideal");
         }
-    },
-    error: error => {
+}, error => {
         // Mostrar el estado de error
         $(".songs-list").removeClass("loading").addClass("error");
 
         // Hacemos log del error en la consola
         console.error("Error al cargar las canciones", error);
-    }
 });
