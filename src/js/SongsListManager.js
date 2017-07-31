@@ -1,13 +1,25 @@
 
+//import PubSub from "pubsub-js";
+
 export default class SongsListManager {
 
-    constructor(songService, uiManager){
+    constructor(songService, uiManager, pubSub){
         this.songService = songService; 
         this.uiManager = uiManager;
+        this.pubSub = pubSub;
     }
 
     init(){
         this.loadSongs();
+        /*
+        function(topic, song){
+            this.loadSongs(); Hace scope solo dentro de esta funcion
+            }
+        */
+        this.pubSub.subscribe('new-song', (topic,song) =>{
+            console.log('Se hizo subscribe');
+            this.loadSongs();        
+        });
     }
     
     //Metodo que carga las canciones
