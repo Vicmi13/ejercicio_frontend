@@ -5,7 +5,7 @@ export default class UIManager{
 
     //selector es el elemento de jquery con el que deseamos trabajar
     constructor(selector){
-           //this._name Creo que creo y asiga al mismo tiempo
+           //this._name Lo creo y asigno valor al mismo tiempo
            this.uiStateClasses = "empty loading error partial ideal"; //Clases CSS que definen estados de componentes
            this.element = $(selector); //Seleccionamos el elemto de Jquery en el constructor 
     }
@@ -36,22 +36,22 @@ export default class UIManager{
     }
 
     setLoadingHtml(html){
-        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y loading  le asigna el HTML
         this.element.find(".ui-status.loading").html(html);
     }
 
     setErrorHtml(html){
-        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y error  le asigna el HTML
         this.element.find(".ui-status.error").html(html);
     }
 
     setPartialHtml(html){
-        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y partial  le asigna el HTML
         this.element.find(".ui-status.partial").html(html);
     }
 
     setIdealHtml(html){
-        //busca un descendiente de this.element, que tenga las clases CSS ui-status y empty  le asigna el HTML
+        //busca un descendiente de this.element, que tenga las clases CSS ui-status y ideal  le asigna el HTML
         this.element.find(".ui-status.ideal").html(html);
     }
 }

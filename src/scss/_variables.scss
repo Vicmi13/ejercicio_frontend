@@ -34,5 +34,12 @@ $mobile-landscape-width: 767px;
 $tablet-portrait-width: $mobile-landscape-width + 1;
 $tablet-landscape-width: 1024px;
 
+//form variables
+$form-input-border-color: $color-innocent;
+$form-input-outline-color: $color-martha;
+$form-button-background-color: $color-iam_afternoons; 
+$form-button-font-color: $color-innocent;
+$form-error-background-color: $color-iam_afternoons;
+$form-error-font-color: $color-innocent;
 //portrait = vertical --- landscape = horizontal
 

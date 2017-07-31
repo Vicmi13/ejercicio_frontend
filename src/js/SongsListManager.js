@@ -1,4 +1,3 @@
-const $ = require ('jquery');
 
 export default class SongsListManager {
 
@@ -42,13 +41,19 @@ export default class SongsListManager {
             // Componemos el HTML con todas las canciones
                 let html = "";
                 for (let song of songs) {
-                html += `<article class="song">
-                    <img src="${song.cover_url}" alt="${song.artist} - ${song.title}" class="cover">
-                        <   div class="artist">${song.artist}</div>
-                        <div class="title">${song.title}</div>
-                    </article>`;
+                    html += this.renderSong(song);
                 }
             // Metemos el HTML en el div que contiene las canciones
-            $(".song-list .ui-status.ideal").html(html);
+            this.uiManager.setIdealHtml(html);
+            //Al factorizar esto, ya no es necesario Jquery aquí. Se elimina variable declarada en el top ->const $ = require ('jquery');
+    }
+
+
+    renderSong (song){
+        return `<article class="song">
+                    <img src="${song.cover_url}" alt="${song.artist} - ${song.title}" class="cover">
+                        <div class="artist">${song.artist}</div>
+                        <div class="title">${song.title}</div>
+                    </article>`;
     }
 }
