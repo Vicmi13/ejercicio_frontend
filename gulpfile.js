@@ -11,11 +11,13 @@ var gulp = require("gulp"),
     uglify = require ('gulp-uglify'),
     postcss = require ('gulp-postcss'),
     autoprefixer = require ('autoprefixer'),
-    cssnano = require('cssnano');
+    cssnano = require('cssnano'),
+    imagemin = require('gulp-imagemin'),
+    responsive = require('gulp-responsive');
 
 
 //definir tarea por defecto
-gulp.task("default", ["html", "sass", "js"], function (){ //Indica que inicialize la tarea '[sass]' y luego la tarea default osea entra ya a la function
+gulp.task("default", ["img", "html", "sass", "js"], function (){ //Indica que inicialize la tarea '[sass]' y luego la tarea default osea entra ya a la function
 
     //iniciamos el servidor de desarrollo.. en esa carpeta ANTES 'src/'  AHORA 'dist/' 
     //CLASE 7 como ya  se esta utilizando el servidor de json-server se tiene que cambiar 'browserSync a proxxy  y ahi poner la url del servidor donde esta corriendo' 
@@ -84,4 +86,18 @@ gulp.task('js', function(){
         .pipe(gulp.dest("dist/")) //lo guardamos en la carpeta dist
         .pipe(browserSync.stream()) //recargamos el navegador
         .pipe(notify("JS compilado"));
+})
+
+//tarea que optimiza y crea las imágenes responsive
+gulp.task('img', function(){
+    gulp.src('src/img/*')
+    .pipe(responsive({ //generamos las versiones responsive
+        '*.png':[
+            { width: 150, rename: {suffix: "-150px"}},
+            { width: 250, rename: {suffix: "-250px"}},
+            { width: 300, rename: {suffix: "-300px"}}
+        ]
+    })) 
+    .pipe(imagemin()) //optimizamos  el paso de las imagenes
+    .pipe(gulp.dest('dist/img/'))
 })
